@@ -50,7 +50,7 @@ namespace WixXmlGenerator.Commands
                     }
                     else
                     {
-                        throw new Exception("Command not recognized. Generate command can be used as 'WixXmlGenerator -generate -sourceDir <SOURCE_DIRECTORY_PATH> -outputFile <OUTPUT_FILE_PATH>'");
+                        throw new Exception("Command not recognized. Generate command can be used as 'WixXmlGenerator -generate -sourceDir <SOURCE_DIRECTORY_PATH> -wxsDir <WXS_FILE_FOLDER> -projectName <PROJECT_NAME> -outputFile <OUTPUT_FILE_PATH>'");
                     }
                 }
                 else

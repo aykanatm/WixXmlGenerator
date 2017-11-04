@@ -7,7 +7,7 @@ namespace WixXmlGenerator.Commands
 {
     public class GenerateCommand : Command, ICommand
     {
-        public GenerateCommand() : base(4)
+        public GenerateCommand() : base(8)
         {
 
         }
@@ -18,10 +18,14 @@ namespace WixXmlGenerator.Commands
             {
                 var sourceDirArg = args[1];
                 var sourceDir = args[2];
-                var outputFileArg = args[3];
-                var outputFile = args[4];
+                var wxsDirArg = args[3];
+                var wxsDir = args[4];
+                var outputFileArg = args[5];
+                var outputFile = args[6];
+                var projectNameArg = args[7];
+                var projectName = args[8];
 
-                if (sourceDirArg == Arguments.SourceDir && outputFileArg == Arguments.OutputFile)
+                if (sourceDirArg == Arguments.SourceDir && outputFileArg == Arguments.OutputFile && wxsDirArg == Arguments.WxsDir && projectNameArg == Arguments.ProjectName)
                 {
                     if (Directory.Exists(sourceDir))
                     {
@@ -32,7 +36,7 @@ namespace WixXmlGenerator.Commands
                             var response = (char) Console.Read();
                             if (response == 'y' || response == 'Y')
                             {
-                                Wix.WixXmlGenerator.Generate(sourceDir, outputFile);
+                                Wix.WixXmlGenerator.Generate(sourceDir, outputFile, wxsDir, projectName);
                             }
                             else if (response == 'n' || response == 'N')
                             {
