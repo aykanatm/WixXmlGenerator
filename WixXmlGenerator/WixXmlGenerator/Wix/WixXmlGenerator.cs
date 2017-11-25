@@ -8,18 +8,22 @@ namespace WixXmlGenerator.Wix
 {
     public static class WixXmlGenerator
     {
-        public static void Generate(string sourceDir, string outputFile, string wxsPath, string projectFolderName)
+        public static string Generate(string sourceDir, string outputFile, string wxsPath, string projectFolderName)
         {
             try
             {
-                var fileContentString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n";
+                var fileContentString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Wix>\n";
                 var folders = GetFolders(sourceDir);
                 var filePaths = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories);
 
+                fileContentString += "<Directory Id=\"TARGETDIR\" Name=\"SourceDir\">\n";
                 foreach (var folder in folders)
                 {
                     fileContentString += folder.ToXml();
                 }
+                fileContentString +=
+                    "<Directory Id=\"ProgramMenuFolder\">\n<Directory Id=\"MyShortcutsDir\" Name=\"" + projectFolderName + "\"/>\n</Directory>\n";
+                fileContentString += "</Directory>\n";
 
                 var files = new List<Models.File>();
 
@@ -33,7 +37,8 @@ namespace WixXmlGenerator.Wix
                     fileContentString += file.ToXml();
                 }
 
-                Console.WriteLine(fileContentString);
+                fileContentString += "</Wix>";
+                return fileContentString;
             }
             catch (Exception e)
             {

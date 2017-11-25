@@ -52,6 +52,7 @@
     <Compile Include="Models\Folder.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\OutputFileGenerator.cs" />
     <Compile Include="Statics\Arguments.cs" />
     <Compile Include="Statics\Commands.cs" />
     <Compile Include="Wix\WixXmlGenerator.cs" />

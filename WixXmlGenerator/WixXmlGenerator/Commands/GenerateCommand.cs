@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using WixXmlGenerator.Services;
 using WixXmlGenerator.Statics;
 
 namespace WixXmlGenerator.Commands
@@ -25,6 +26,8 @@ namespace WixXmlGenerator.Commands
                 var projectNameArg = args[7];
                 var projectName = args[8];
 
+                var resultString = "";
+
                 if (sourceDirArg == Arguments.SourceDir && outputFileArg == Arguments.OutputFile && wxsPathArg == Arguments.WxsDir && projectNameArg == Arguments.ProjectName)
                 {
                     if (Directory.Exists(sourceDir))
@@ -36,7 +39,7 @@ namespace WixXmlGenerator.Commands
                             var response = (char) Console.Read();
                             if (response == 'y' || response == 'Y')
                             {
-                                Wix.WixXmlGenerator.Generate(sourceDir, outputFile, wxsPath, projectName);
+                                resultString = Wix.WixXmlGenerator.Generate(sourceDir, outputFile, wxsPath, projectName);
                             }
                             else if (response == 'n' || response == 'N')
                             {
@@ -57,6 +60,8 @@ namespace WixXmlGenerator.Commands
                 {
                     throw new Exception("One or more of the provided arguments not recognized.");
                 }
+
+                OutputFileGenerator.Generate(resultString, outputFile);
 
                 return "Output file successfully created at '" + outputFile + "'.";
             }
