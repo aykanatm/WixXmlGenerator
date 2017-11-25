@@ -12,7 +12,7 @@ namespace WixXmlGenerator.Wix
         {
             try
             {
-                var fileContentString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Wix>\n";
+                var fileContentString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Wix xmlns=\"http://schemas.microsoft.com/wix/2006/wi\">\n";
                 var folders = GetFolders(sourceDir);
                 var filePaths = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories);
 
