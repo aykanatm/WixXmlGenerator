@@ -8,7 +8,7 @@ namespace WixXmlGenerator.Wix
 {
     public static class WixXmlGenerator
     {
-        public static void Generate(string sourceDir, string outputFile, string wxsDir, string projectFolderName)
+        public static void Generate(string sourceDir, string outputFile, string wxsPath, string projectFolderName)
         {
             try
             {
@@ -25,7 +25,7 @@ namespace WixXmlGenerator.Wix
 
                 foreach (var filePath in filePaths)
                 {
-                    files.Add(new Models.File(filePath, wxsDir, sourceDir));
+                    files.Add(new Models.File(filePath, wxsPath, sourceDir));
                 }
 
                 foreach (var file in files)
