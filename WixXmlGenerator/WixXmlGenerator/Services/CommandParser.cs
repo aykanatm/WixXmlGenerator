@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using WixXmlGenerator.Commands;
 
-namespace WixXmlGenerator.Commands
+namespace WixXmlGenerator.Services
 {
     public static class CommandParser
     {

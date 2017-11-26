@@ -39,7 +39,7 @@ namespace WixXmlGenerator.Commands
                             var response = (char) Console.Read();
                             if (response == 'y' || response == 'Y')
                             {
-                                resultString = Wix.WixXmlGenerator.Generate(sourceDir, outputFile, wxsPath, projectName);
+                                resultString = Services.WixXmlGenerator.Generate(sourceDir, outputFile, wxsPath, projectName);
                             }
                             else if (response == 'n' || response == 'N')
                             {

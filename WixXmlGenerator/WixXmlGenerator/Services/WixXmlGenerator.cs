@@ -4,7 +4,7 @@ using System.IO;
 using System.Linq;
 using WixXmlGenerator.Models;
 
-namespace WixXmlGenerator.Wix
+namespace WixXmlGenerator.Services
 {
     public static class WixXmlGenerator
     {

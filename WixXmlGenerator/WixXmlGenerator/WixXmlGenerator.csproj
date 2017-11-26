@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Command.cs" />
-    <Compile Include="Commands\CommandParser.cs" />
+    <Compile Include="Services\CommandParser.cs" />
     <Compile Include="Commands\GenerateCommand.cs" />
     <Compile Include="Commands\HelpCommand.cs" />
     <Compile Include="Commands\ICommand.cs" />
@@ -55,7 +55,7 @@
     <Compile Include="Services\OutputFileGenerator.cs" />
     <Compile Include="Statics\Arguments.cs" />
     <Compile Include="Statics\Commands.cs" />
-    <Compile Include="Wix\WixXmlGenerator.cs" />
+    <Compile Include="Services\WixXmlGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

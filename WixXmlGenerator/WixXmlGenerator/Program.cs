@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using WixXmlGenerator.Commands;
+using WixXmlGenerator.Services;
 
 namespace WixXmlGenerator
 {
