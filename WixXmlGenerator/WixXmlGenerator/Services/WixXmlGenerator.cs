@@ -13,8 +13,9 @@ namespace WixXmlGenerator.Services
             try
             {
                 var fileContentString = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<Wix xmlns=\"http://schemas.microsoft.com/wix/2006/wi\">\n";
-                var folders = GetFolders(sourceDir);
+                var wixIgnore = WixIgnoreParser.GenerateWixIgnore(sourceDir);
                 var filePaths = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories);
+                var folders = GetFolders(sourceDir, wixIgnore);
 
                 fileContentString += "<Directory Id=\"TARGETDIR\" Name=\"SourceDir\">\n";
                 foreach (var folder in folders)
@@ -29,7 +30,10 @@ namespace WixXmlGenerator.Services
 
                 foreach (var filePath in filePaths)
                 {
-                    files.Add(new Models.File(filePath, wxsPath, sourceDir));
+                    if (!wixIgnore.Contains(filePath))
+                    {
+                        files.Add(new Models.File(filePath, wxsPath, sourceDir));
+                    }
                 }
 
                 foreach (var file in files)
@@ -46,7 +50,7 @@ namespace WixXmlGenerator.Services
             }
         }
 
-        private static List<Folder> GetFolders(string sourceDir)
+        private static List<Folder> GetFolders(string sourceDir, WixIgnore wixIgnore)
         {
             var folders = new List<Folder>();
 
@@ -56,9 +60,12 @@ namespace WixXmlGenerator.Services
             {
                 foreach (var directoryPath in directoryPaths)
                 {
-                    var childFolders = GetFolders(directoryPath);
-                    var folder = new Folder(directoryPath, childFolders);
-                    folders.Add(folder);
+                    if (!wixIgnore.Contains(directoryPath))
+                    {
+                        var childFolders = GetFolders(directoryPath, wixIgnore);
+                        var folder = new Folder(directoryPath, childFolders);
+                        folders.Add(folder);
+                    }
                 }
             }
 

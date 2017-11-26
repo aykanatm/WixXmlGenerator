@@ -31,6 +31,7 @@ namespace WixXmlGenerator
             catch (Exception e)
             {
                 Console.WriteLine("An error occured. " + e.Message);
+                Console.WriteLine(e);
             }
         }
     }
