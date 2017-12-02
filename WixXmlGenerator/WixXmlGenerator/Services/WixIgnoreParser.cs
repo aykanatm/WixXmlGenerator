@@ -34,7 +34,7 @@ namespace WixXmlGenerator.Services
                         {
                             if (!line.StartsWith("#"))
                             {
-                                // Extension
+                                // Extension (e.g. *.pdb)
                                 if (line.StartsWith("*."))
                                 {
                                     var extension = line.Substring(2, 3);
@@ -50,22 +50,33 @@ namespace WixXmlGenerator.Services
                                 // Directory
                                 else if (line.StartsWith("/"))
                                 {
+                                    var directoryString = line.Substring(1, line.Length - 2);
+
+                                    var splitDirectories = directoryString.Split('/');
+
+                                    // e.g. /Directory/ or /Directory_1/Directory_2/
                                     if (line.EndsWith("/"))
                                     {
                                         foreach (var folderPath in folderPaths)
                                         {
                                             var directoryInfo = new DirectoryInfo(folderPath);
-                                            if (directoryInfo.Exists && directoryInfo.Name == line.Substring(1, line.Length - 2))
+                                            if (directoryInfo.Exists)
                                             {
-                                                ignoredfolderPaths.Add(folderPath);
+                                                if (directoryInfo.Name == splitDirectories[splitDirectories.Length - 1])
+                                                {
+                                                    var result = HasMatchingDirectoryStructure(directoryInfo, splitDirectories, splitDirectories.Length - 2, true);
+                                                    if (result)
+                                                    {
+                                                        ignoredfolderPaths.Add(folderPath);
+                                                    }
+                                                }
                                             }
                                         }
-                                        // TODO: Add /Directory1/Directory2/
                                     }
                                     // TODO: Add /*.xml
                                     // TODO: Add /Directory 1/.../*.xml
                                 }
-                                // Specific file
+                                // Specific file (e.g. test.txt) or a random string which will not match any file paths
                                 else
                                 {
                                     foreach (var filePath in filePaths)
@@ -91,6 +102,28 @@ namespace WixXmlGenerator.Services
             {
                 throw e;
             }
+        }
+
+        private static bool HasMatchingDirectoryStructure(DirectoryInfo directoryInfo, string[] directories, int index, bool result)
+        {
+            try
+            {
+                if (index == -1 || result == false)
+                {
+                    return result;
+                }
+
+                if (directoryInfo.Parent != null && directoryInfo.Parent.Name == directories[index])
+                {
+                    return HasMatchingDirectoryStructure(directoryInfo.Parent, directories, index - 1, true);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+            return result;
         }
     }
 }
