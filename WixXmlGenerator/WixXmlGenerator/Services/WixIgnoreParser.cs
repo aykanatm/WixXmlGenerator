@@ -37,13 +37,17 @@ namespace WixXmlGenerator.Services
                                 // Extension (e.g. *.pdb)
                                 if (line.StartsWith("*."))
                                 {
-                                    var extension = line.Substring(2, 3);
-
-                                    foreach (var filePath in filePaths)
+                                    var splitString = line.Split('.');
+                                    if (splitString.Length == 2)
                                     {
-                                        if (filePath.EndsWith(extension))
+                                        var extension = splitString[1];
+
+                                        foreach (var filePath in filePaths)
                                         {
-                                            ignoredfilePaths.Add(filePath);
+                                            if (filePath.EndsWith(extension))
+                                            {
+                                                ignoredfilePaths.Add(filePath);
+                                            }
                                         }
                                     }
                                 }
@@ -73,6 +77,7 @@ namespace WixXmlGenerator.Services
                                             }
                                         }
                                     }
+                                    
                                     // TODO: Add /*.xml
                                     // TODO: Add /Directory 1/.../*.xml
                                 }
