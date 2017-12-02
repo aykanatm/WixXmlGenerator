@@ -14,7 +14,8 @@ namespace WixXmlGenerator.Services
                 var wixIgnoreFilePath = AppDomain.CurrentDomain.BaseDirectory + ".wixignore";
                 if (!System.IO.File.Exists(wixIgnoreFilePath))
                 {
-                    System.IO.File.Create(wixIgnoreFilePath);
+                    var wixIgnoreFile = System.IO.File.Create(wixIgnoreFilePath);
+                    wixIgnoreFile.Close();
                 }
 
                 var filePaths = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories);
