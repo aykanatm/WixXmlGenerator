@@ -54,13 +54,12 @@ namespace WixXmlGenerator.Services
                                 // Directory
                                 else if (line.StartsWith("/"))
                                 {
-                                    var directoryString = line.Substring(1, line.Length - 2);
-
-                                    var splitDirectories = directoryString.Split('/');
-
                                     // e.g. /Directory/ or /Directory_1/Directory_2/
                                     if (line.EndsWith("/"))
                                     {
+                                        var directoryString = line.Substring(1, line.Length - 2);
+                                        var splitDirectories = directoryString.Split('/');
+
                                         foreach (var folderPath in folderPaths)
                                         {
                                             var directoryInfo = new DirectoryInfo(folderPath);
@@ -77,9 +76,50 @@ namespace WixXmlGenerator.Services
                                             }
                                         }
                                     }
-                                    
-                                    // TODO: Add /*.xml
-                                    // TODO: Add /Directory 1/.../*.xml
+                                    // e.g. /*.xml or /Directory_1/Directory_2/*.xml
+                                    else
+                                    {
+                                        var directoryString = line;
+                                        var splitDirectories = directoryString.Split('/');
+
+                                        var extensionString = splitDirectories[splitDirectories.Length - 1];
+                                        
+                                        var splitExtensionString = extensionString.Split('.');
+                                        if (splitExtensionString.Length == 2)
+                                        {
+                                            var extension = splitExtensionString[1];
+                                            var sourceDirInfo = new DirectoryInfo(sourceDir);
+                                            var parentFolder = sourceDirInfo.Name;
+
+                                            if (splitDirectories.Length != 1)
+                                            {
+                                                if (!string.IsNullOrEmpty(splitDirectories[splitDirectories.Length - 2]))
+                                                {
+                                                    parentFolder = splitDirectories[splitDirectories.Length - 2];
+                                                }
+                                            }
+
+                                            foreach (var filePath in filePaths)
+                                            {
+                                                
+                                                if (filePath.EndsWith(extension))
+                                                {
+                                                    var fileInfo = new FileInfo(filePath);
+                                                    if (fileInfo.Exists)
+                                                    {
+                                                        if (fileInfo.Directory != null && fileInfo.Directory.Name == parentFolder)
+                                                        {
+                                                            var result = HasMatchingDirectoryStructure(fileInfo.Directory, splitDirectories, splitDirectories.Length - 3, true);
+                                                            if (result)
+                                                            {
+                                                                ignoredfilePaths.Add(filePath);
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 }
                                 // Specific file (e.g. test.txt) or a random string which will not match any file paths
                                 else
