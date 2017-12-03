@@ -13,7 +13,7 @@ Wix Toolset provides a way to harvest files with [heat.exe](http://wixtoolset.or
 Wix XML Generator aims ease this process by automating the process generating the file and directory structure. It is a command line tool for generating XML portion of file, directory and component structure of the Product.wxs file. To control which files are going to be in the setup file, it uses a `.wixignore` file similar to GitHub's `.gitignore` file, to ignore files and folders.
 
 ### Installation
-1. [Download](https://github.com/aykanatm/WixXmlGenerator/releases/tag/v1.0.0) and unzip the WixXMLGenerator_v1.0.0.zip into a folder of your choosing.
+1. [Download](https://github.com/aykanatm/WixXmlGenerator/releases) and unzip the latest version of Wix XML Generator into a folder of your choosing.
 2. Add this folder path into the PATH environment variable.
 
 ### Usage
@@ -82,8 +82,18 @@ with the .wixignore file of:
 *.pdb
 # ignore XML files in root
 /*.xml
-# ignore Resources Directory
+# ignore directories
 /Resources/
+/de/
+/es/
+/fr/
+/it/
+/ja/
+/ko/
+/nl/
+/ru/
+/zh-Hans/
+/zh-Hant/
 ```
 generates:
 ```
@@ -91,21 +101,15 @@ generates:
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <!-- Folder Structure -->
   <Directory Id="TARGETDIR" Name="SourceDir">
-    <Directory Id="ConfigurationFolderId" Name="Configuration" />
-    <Directory Id="deFolderId" Name="de" />
-    <Directory Id="DocumentationFolderId" Name="Documentation" />
-    <Directory Id="enFolderId" Name="en" />
-    <Directory Id="esFolderId" Name="es" />
-    <Directory Id="frFolderId" Name="fr" />
-    <Directory Id="itFolderId" Name="it" />
-    <Directory Id="jaFolderId" Name="ja" />
-    <Directory Id="koFolderId" Name="ko" />
-    <Directory Id="localesFolderId" Name="locales" />
-    <Directory Id="nlFolderId" Name="nl" />
-    <Directory Id="ruFolderId" Name="ru" />
-    <Directory Id="StylesFolderId" Name="Styles" />
-    <Directory Id="zh-HansFolderId" Name="zh-Hans" />
-    <Directory Id="zh-HantFolderId" Name="zh-Hant" />
+    <Directory Id="ProgramFilesFolder">
+      <Directory Id="INSTALLDIR" Name="ProjectMarkdown">
+        <Directory Id="ConfigurationFolderId" Name="Configuration" />
+        <Directory Id="DocumentationFolderId" Name="Documentation" />
+        <Directory Id="enFolderId" Name="en" />
+        <Directory Id="localesFolderId" Name="locales" />
+        <Directory Id="StylesFolderId" Name="Styles" />
+      </Directory>
+    </Directory>
     <Directory Id="ProgramMenuFolder">
       <Directory Id="MyShortcutsDir" Name="ProjectMarkdown" />
     </Directory>
@@ -321,16 +325,6 @@ generates:
       <File Id="MarkdownSyntaxHighlighting.xml" Name="MarkdownSyntaxHighlighting.xml" Source="..\ProjectMarkdown\bin\x86\Release\Configuration\MarkdownSyntaxHighlighting.xml" KeyPath="yes" />
     </Component>
   </DirectoryRef>
-  <DirectoryRef Id="deFolderId">
-    <Component Id="de_Microsoft.Expression.Interactions.resources.dll">
-      <File Id="Microsoft.Expression.Interactions.resources.dll" Name="Microsoft.Expression.Interactions.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\de\Microsoft.Expression.Interactions.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="deFolderId">
-    <Component Id="de_System.Windows.Interactivity.resources.dll">
-      <File Id="System.Windows.Interactivity.resources.dll" Name="System.Windows.Interactivity.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\de\System.Windows.Interactivity.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
   <DirectoryRef Id="DocumentationFolderId">
     <Component Id="Documentation_Project Markdown User Guide.pdf">
       <File Id="Project Markdown User Guide.pdf" Name="Project Markdown User Guide.pdf" Source="..\ProjectMarkdown\bin\x86\Release\Documentation\Project Markdown User Guide.pdf" KeyPath="yes" />
@@ -344,56 +338,6 @@ generates:
   <DirectoryRef Id="enFolderId">
     <Component Id="en_System.Windows.Interactivity.resources.dll">
       <File Id="System.Windows.Interactivity.resources.dll" Name="System.Windows.Interactivity.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\en\System.Windows.Interactivity.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="esFolderId">
-    <Component Id="es_Microsoft.Expression.Interactions.resources.dll">
-      <File Id="Microsoft.Expression.Interactions.resources.dll" Name="Microsoft.Expression.Interactions.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\es\Microsoft.Expression.Interactions.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="esFolderId">
-    <Component Id="es_System.Windows.Interactivity.resources.dll">
-      <File Id="System.Windows.Interactivity.resources.dll" Name="System.Windows.Interactivity.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\es\System.Windows.Interactivity.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="frFolderId">
-    <Component Id="fr_Microsoft.Expression.Interactions.resources.dll">
-      <File Id="Microsoft.Expression.Interactions.resources.dll" Name="Microsoft.Expression.Interactions.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\fr\Microsoft.Expression.Interactions.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="frFolderId">
-    <Component Id="fr_System.Windows.Interactivity.resources.dll">
-      <File Id="System.Windows.Interactivity.resources.dll" Name="System.Windows.Interactivity.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\fr\System.Windows.Interactivity.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="itFolderId">
-    <Component Id="it_Microsoft.Expression.Interactions.resources.dll">
-      <File Id="Microsoft.Expression.Interactions.resources.dll" Name="Microsoft.Expression.Interactions.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\it\Microsoft.Expression.Interactions.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="itFolderId">
-    <Component Id="it_System.Windows.Interactivity.resources.dll">
-      <File Id="System.Windows.Interactivity.resources.dll" Name="System.Windows.Interactivity.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\it\System.Windows.Interactivity.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="jaFolderId">
-    <Component Id="ja_Microsoft.Expression.Interactions.resources.dll">
-      <File Id="Microsoft.Expression.Interactions.resources.dll" Name="Microsoft.Expression.Interactions.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\ja\Microsoft.Expression.Interactions.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="jaFolderId">
-    <Component Id="ja_System.Windows.Interactivity.resources.dll">
-      <File Id="System.Windows.Interactivity.resources.dll" Name="System.Windows.Interactivity.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\ja\System.Windows.Interactivity.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="koFolderId">
-    <Component Id="ko_Microsoft.Expression.Interactions.resources.dll">
-      <File Id="Microsoft.Expression.Interactions.resources.dll" Name="Microsoft.Expression.Interactions.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\ko\Microsoft.Expression.Interactions.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="koFolderId">
-    <Component Id="ko_System.Windows.Interactivity.resources.dll">
-      <File Id="System.Windows.Interactivity.resources.dll" Name="System.Windows.Interactivity.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\ko\System.Windows.Interactivity.resources.dll" KeyPath="yes" />
     </Component>
   </DirectoryRef>
   <DirectoryRef Id="localesFolderId">
@@ -661,44 +605,9 @@ generates:
       <File Id="zh_TW.pak" Name="zh-TW.pak" Source="..\ProjectMarkdown\bin\x86\Release\locales\zh-TW.pak" KeyPath="yes" />
     </Component>
   </DirectoryRef>
-  <DirectoryRef Id="nlFolderId">
-    <Component Id="nl_PdfiumViewer.resources.dll">
-      <File Id="PdfiumViewer.resources.dll" Name="PdfiumViewer.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\nl\PdfiumViewer.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="ruFolderId">
-    <Component Id="ru_Microsoft.Expression.Interactions.resources.dll">
-      <File Id="Microsoft.Expression.Interactions.resources.dll" Name="Microsoft.Expression.Interactions.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\ru\Microsoft.Expression.Interactions.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="ruFolderId">
-    <Component Id="ru_System.Windows.Interactivity.resources.dll">
-      <File Id="System.Windows.Interactivity.resources.dll" Name="System.Windows.Interactivity.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\ru\System.Windows.Interactivity.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
   <DirectoryRef Id="StylesFolderId">
     <Component Id="Styles_github_markdown.css">
       <File Id="github_markdown.css" Name="github-markdown.css" Source="..\ProjectMarkdown\bin\x86\Release\Styles\github-markdown.css" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="zh-HansFolderId">
-    <Component Id="zh-Hans_Microsoft.Expression.Interactions.resources.dll">
-      <File Id="Microsoft.Expression.Interactions.resources.dll" Name="Microsoft.Expression.Interactions.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\zh-Hans\Microsoft.Expression.Interactions.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="zh-HansFolderId">
-    <Component Id="zh-Hans_System.Windows.Interactivity.resources.dll">
-      <File Id="System.Windows.Interactivity.resources.dll" Name="System.Windows.Interactivity.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\zh-Hans\System.Windows.Interactivity.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="zh-HantFolderId">
-    <Component Id="zh-Hant_Microsoft.Expression.Interactions.resources.dll">
-      <File Id="Microsoft.Expression.Interactions.resources.dll" Name="Microsoft.Expression.Interactions.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\zh-Hant\Microsoft.Expression.Interactions.resources.dll" KeyPath="yes" />
-    </Component>
-  </DirectoryRef>
-  <DirectoryRef Id="zh-HantFolderId">
-    <Component Id="zh-Hant_System.Windows.Interactivity.resources.dll">
-      <File Id="System.Windows.Interactivity.resources.dll" Name="System.Windows.Interactivity.resources.dll" Source="..\ProjectMarkdown\bin\x86\Release\zh-Hant\System.Windows.Interactivity.resources.dll" KeyPath="yes" />
     </Component>
   </DirectoryRef>
   <!-- Application Components -->
@@ -745,21 +654,9 @@ generates:
     <ComponentRef Id="widevinecdmadapter.dll" />
     <ComponentRef Id="WPFUtils.dll" />
     <ComponentRef Id="Configuration_MarkdownSyntaxHighlighting.xml" />
-    <ComponentRef Id="de_Microsoft.Expression.Interactions.resources.dll" />
-    <ComponentRef Id="de_System.Windows.Interactivity.resources.dll" />
     <ComponentRef Id="Documentation_Project Markdown User Guide.pdf" />
     <ComponentRef Id="en_Microsoft.Expression.Interactions.resources.dll" />
     <ComponentRef Id="en_System.Windows.Interactivity.resources.dll" />
-    <ComponentRef Id="es_Microsoft.Expression.Interactions.resources.dll" />
-    <ComponentRef Id="es_System.Windows.Interactivity.resources.dll" />
-    <ComponentRef Id="fr_Microsoft.Expression.Interactions.resources.dll" />
-    <ComponentRef Id="fr_System.Windows.Interactivity.resources.dll" />
-    <ComponentRef Id="it_Microsoft.Expression.Interactions.resources.dll" />
-    <ComponentRef Id="it_System.Windows.Interactivity.resources.dll" />
-    <ComponentRef Id="ja_Microsoft.Expression.Interactions.resources.dll" />
-    <ComponentRef Id="ja_System.Windows.Interactivity.resources.dll" />
-    <ComponentRef Id="ko_Microsoft.Expression.Interactions.resources.dll" />
-    <ComponentRef Id="ko_System.Windows.Interactivity.resources.dll" />
     <ComponentRef Id="locales_am.pak" />
     <ComponentRef Id="locales_ar.pak" />
     <ComponentRef Id="locales_bg.pak" />
@@ -813,14 +710,7 @@ generates:
     <ComponentRef Id="locales_vi.pak" />
     <ComponentRef Id="locales_zh-CN.pak" />
     <ComponentRef Id="locales_zh-TW.pak" />
-    <ComponentRef Id="nl_PdfiumViewer.resources.dll" />
-    <ComponentRef Id="ru_Microsoft.Expression.Interactions.resources.dll" />
-    <ComponentRef Id="ru_System.Windows.Interactivity.resources.dll" />
     <ComponentRef Id="Styles_github-markdown.css" />
-    <ComponentRef Id="zh-Hans_Microsoft.Expression.Interactions.resources.dll" />
-    <ComponentRef Id="zh-Hans_System.Windows.Interactivity.resources.dll" />
-    <ComponentRef Id="zh-Hant_Microsoft.Expression.Interactions.resources.dll" />
-    <ComponentRef Id="zh-Hant_System.Windows.Interactivity.resources.dll" />
   </Feature>
 </Wix>
 ```
