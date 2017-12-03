@@ -18,11 +18,13 @@ Wix XML Generator aims ease this process by automating the process generating th
 
 ### Usage
 Wix XML Generator has 3 commands:
+
 **-help:** Displays the help text.
 **-version:** Displays the version information.
 **-generate:** Generates the XML based on the arguments.
 
 Generate command arguments are:
+
 **-sourceDir:** This is the root folder where the tool will build the folders, files and components from.
 **-wxsPath:** This is the file path of the Product.wxs
 **-projectName:** This is the `INSTALLDIR` of the setup.
