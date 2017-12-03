@@ -72,6 +72,12 @@ namespace WixXmlGenerator.Services
                                                     if (result)
                                                     {
                                                         ignoredfolderPaths.Add(folderPath);
+
+                                                        var filesInFolder = Directory.GetFiles(folderPath, "*.*", SearchOption.AllDirectories);
+                                                        foreach (var file in filesInFolder)
+                                                        {
+                                                            ignoredfilePaths.Add(file);
+                                                        }
                                                     }
                                                 }
                                             }
