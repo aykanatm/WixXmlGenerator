@@ -25,7 +25,7 @@ namespace WixXmlGenerator.Services
                     }
                     else
                     {
-                        throw new Exception("Command not recognized. Help command can be used as 'WixXmlGenerator -help'");
+                        throw new Exception("Command not recognized. Please use 'WixXmlGenerator -help' to see command the usages.");
                     }
                 }
                 else if (command == Statics.Commands.Version)
@@ -38,7 +38,7 @@ namespace WixXmlGenerator.Services
                     }
                     else
                     {
-                        throw new Exception("Command not recognized. Version command can be used as 'WixXmlGenerator -version'");
+                        throw new Exception("Command not recognized. Please use 'WixXmlGenerator -help' to see command the usages.");
                     }
                 }
                 else if (command == Statics.Commands.Generate)
@@ -51,12 +51,12 @@ namespace WixXmlGenerator.Services
                     }
                     else
                     {
-                        throw new Exception("Command not recognized. Generate command can be used as 'WixXmlGenerator -generate -sourceDir <SOURCE_DIRECTORY_PATH> -wxsDir <WXS_FILE_FOLDER> -projectName <PROJECT_NAME> -outputFile <OUTPUT_FILE_PATH>'");
+                        throw new Exception("Command not recognized. Please use 'WixXmlGenerator -help' to see command the usages.");
                     }
                 }
                 else
                 {
-                    throw new Exception("Command not recognized. Please use 'WixXmlGenerator -help' to see the usage.");
+                    throw new Exception("Command not recognized. Please use 'WixXmlGenerator -help' to see command the usages.");
                 }
 
                 return result;
