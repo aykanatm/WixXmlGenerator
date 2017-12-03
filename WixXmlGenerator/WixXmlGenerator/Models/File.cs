@@ -25,12 +25,15 @@ namespace WixXmlGenerator.Models
             var relativeUri = wxsUri.MakeRelativeUri(fileUri);
             var relativePath = Uri.UnescapeDataString(relativeUri.ToString()).Replace('/', Path.DirectorySeparatorChar);
 
-            var directoryName = _fileInfo.Directory.Name == _sourceDirInfo.Name
-                ? "INSTALLDIR"
+            var directoryName = _fileInfo.Directory.Name == _sourceDirInfo.Name 
+                ? "INSTALLDIR" 
                 : _fileInfo.Directory.Name + "FolderId";
+            var componentId = _fileInfo.Directory.Name == _sourceDirInfo.Name
+                ? _fileInfo.Name.Replace("-", "_")
+                : _fileInfo.Directory.Name + "_" + _fileInfo.Name.Replace("-", "_");
 
             xmlString += "<DirectoryRef Id=\"" + directoryName + "\">\n";
-            xmlString += "<Component Id=\"" + _fileInfo.Name.Replace("-", "_") + "\">\n";
+            xmlString += "<Component Id=\"" + componentId + "\">\n";
             xmlString += "<File Id=\"" + _fileInfo.Name.Replace("-", "_") + "\" Name=\"" + _fileInfo.Name + "\" Source=\"" + relativePath + "\" KeyPath=\"yes\"/>\n";
             xmlString += "</Component>\n";
             xmlString += "</DirectoryRef>\n";
