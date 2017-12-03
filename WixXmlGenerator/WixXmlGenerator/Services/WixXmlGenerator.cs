@@ -46,11 +46,12 @@ namespace WixXmlGenerator.Services
                 }
 
                 fileContentString += "<!-- Application Components -->\n";
+                fileContentString += "<Feature Id=\"ProductFeature\" Title=\"" + projectFolderName + "\" Level=\"1\">\n";
                 foreach (var component in components)
                 {
                     fileContentString += component.ToXml();
                 }
-
+                fileContentString += "</Feature>\n";
                 fileContentString += "</Wix>";
                 return fileContentString;
             }
