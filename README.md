@@ -1,8 +1,6 @@
 ## Wix XML Generator
 [![Build Status](https://travis-ci.org/aykanatm/WixXmlGenerator.svg?branch=master)](https://travis-ci.org/aykanatm/WixXmlGenerator)
 
-## Wix XML Generator
-
 [Wix Toolset](http://wixtoolset.org/) is a very popular tool to generate installers for .NET applications. It is fairly easy to setup, however, it requires you to add every single file and directory as relative paths into its configuration file.This process brings up some issues.
 * It is very tiresome to model your file and directory structure if you have a very big project with hundereds of files.
 * If your application is changing rapidly, you need to track down every removed/moved/added file/directory and change your file, folder and component structure accordingly.
