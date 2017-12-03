@@ -19,12 +19,15 @@ namespace WixXmlGenerator.Services
 
                 fileContentString += "<!-- Folder Structure -->\n";
                 fileContentString += "<Directory Id=\"TARGETDIR\" Name=\"SourceDir\">\n";
+                fileContentString += "<Directory Id=\"ProgramFilesFolder\">\n";
+                fileContentString += "<Directory Id=\"INSTALLDIR\" Name=\"" + projectFolderName + "\">\n";
                 foreach (var folder in folders)
                 {
                     fileContentString += folder.ToXml();
                 }
-                fileContentString +=
-                    "<Directory Id=\"ProgramMenuFolder\">\n<Directory Id=\"MyShortcutsDir\" Name=\"" + projectFolderName + "\"/>\n</Directory>\n";
+                fileContentString += "</Directory>\n";
+                fileContentString += "</Directory>\n";
+                fileContentString += "<Directory Id=\"ProgramMenuFolder\">\n<Directory Id=\"MyShortcutsDir\" Name=\"" + projectFolderName + "\"/>\n</Directory>\n";
                 fileContentString += "</Directory>\n";
 
                 var files = new List<Models.File>();
