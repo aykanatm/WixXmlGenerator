@@ -1,6 +1,8 @@
 ## Wix XML Generator
 [![Build Status](https://travis-ci.org/aykanatm/WixXmlGenerator.svg?branch=master)](https://travis-ci.org/aykanatm/WixXmlGenerator)
 
+## Wix XML Generator
+
 [Wix Toolset](http://wixtoolset.org/) is a very popular tool to generate installers for .NET applications. It is fairly easy to setup, however, it requires you to add every single file and directory as relative paths into its configuration file.This process brings up some issues.
 * It is very tiresome to model your file and directory structure if you have a very big project with hundereds of files.
 * If your application is changing rapidly, you need to track down every removed/moved/added file/directory and change your file, folder and component structure accordingly.
@@ -11,7 +13,7 @@ Wix Toolset provides a way to harvest files with [heat.exe](http://wixtoolset.or
 Wix XML Generator aims ease this process by automating the process generating the file and directory structure. It is a command line tool for generating XML portion of file, directory and component structure of the Product.wxs file. To control which files are going to be in the setup file, it uses a `.wixignore` file similar to GitHub's `.gitignore` file, to ignore files and folders.
 
 ### Installation
-1. Download and unzip the WixXMLGenerator_v1.0.0.zip into a folder of your choosing.
+1. [Download](https://github.com/aykanatm/WixXmlGenerator/releases/tag/v1.0.0) and unzip the WixXMLGenerator_v1.0.0.zip into a folder of your choosing.
 2. Add this folder path into the PATH environment variable.
 
 ### Usage
@@ -820,4 +822,3 @@ generates:
   </Feature>
 </Wix>
 ```
-
