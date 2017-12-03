@@ -50,6 +50,10 @@ namespace WixXmlGenerator.Commands
                                 throw new Exception("Response '" + response + "' is not a valid response.");
                             }
                         }
+                        else
+                        {
+                            resultString = Services.WixXmlGenerator.Generate(sourceDir, outputFile, wxsPath, projectName);
+                        }
                     }
                     else
                     {
