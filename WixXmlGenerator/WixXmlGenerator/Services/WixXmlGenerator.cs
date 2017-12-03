@@ -17,6 +17,7 @@ namespace WixXmlGenerator.Services
                 var filePaths = Directory.GetFiles(sourceDir, "*.*", SearchOption.AllDirectories);
                 var folders = GetFolders(sourceDir, wixIgnore);
 
+                fileContentString += "<!-- Folder Structure -->\n";
                 fileContentString += "<Directory Id=\"TARGETDIR\" Name=\"SourceDir\">\n";
                 foreach (var folder in folders)
                 {
@@ -27,18 +28,27 @@ namespace WixXmlGenerator.Services
                 fileContentString += "</Directory>\n";
 
                 var files = new List<Models.File>();
+                var components = new List<Component>();
 
                 foreach (var filePath in filePaths)
                 {
                     if (!wixIgnore.Contains(filePath))
                     {
                         files.Add(new Models.File(filePath, wxsPath, sourceDir));
+                        components.Add(new Component(filePath, sourceDir));
                     }
                 }
 
+                fileContentString += "<!-- Files -->\n";
                 foreach (var file in files)
                 {
                     fileContentString += file.ToXml();
+                }
+
+                fileContentString += "<!-- Application Components -->\n";
+                foreach (var component in components)
+                {
+                    fileContentString += component.ToXml();
                 }
 
                 fileContentString += "</Wix>";

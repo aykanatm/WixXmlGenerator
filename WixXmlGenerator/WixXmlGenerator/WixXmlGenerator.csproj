@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\Command.cs" />
+    <Compile Include="Models\Component.cs" />
     <Compile Include="Models\WixIgnore.cs" />
     <Compile Include="Services\CommandParser.cs" />
     <Compile Include="Commands\GenerateCommand.cs" />
