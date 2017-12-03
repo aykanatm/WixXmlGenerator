@@ -33,7 +33,7 @@ Generate command arguments are:
 The basic usage of the tool is as follows:
 
 ```
-WixXmlGenerator.exe - generate - sourceDir <SOURCE_DIRECTORY_PATH> -wxsPath <WXS_FILE_PATH> -projectName <PROJECT_NAME> -outputFile <OUTPUT_FILE_PATH>
+WixXmlGenerator.exe -generate -sourceDir <SOURCE_DIRECTORY_PATH> -wxsPath <WXS_FILE_PATH> -outputFile <OUTPUT_FILE_PATH> -projectName <PROJECT_NAME>
 ```
 ### The .wixignore File
 By using a `.wixignore` file, you can exclude:
